@@ -9,7 +9,7 @@
 
 **ტექნიკური მხარე:**
 
-- ფრონტი სტატიკურია და GitHub Pages-ზე დგას.
+- ფრონტი სტატიკურია და Vercel-ზე დგას.
 - სერვერი არის Supabase: Postgres, RLS და RPC ფუნქციები, ხოლო pg_cron ყოველ წუთს ამუშავებს რაუნდებს.
 - ბალანსს მხოლოდ სერვერი ცვლის. ბრაუზერი მხოლოდ კითხულობს მონაცემებს და იძახებს ფუნქციებს.
 
@@ -34,8 +34,8 @@ select count(*) from public.items;             -- მაღაზიის ნ�
 
 **Authentication → URL Configuration:**
 
-- **Site URL:** `https://<მომხმარებელი>.github.io/<რეპო>/`
-- **Redirect URLs:** იგივე მისამართი, ბოლოში `**`-ით, მაგ. `https://<მომხმარებელი>.github.io/<რეპო>/**`
+- **Site URL:** `https://zarapkhana.vercel.app/`
+- **Redirect URLs:** `https://zarapkhana.vercel.app/**`
 
 **ელფოსტა + პაროლი და ბმული ელფოსტაზე** (Authentication → Providers → Email) ჩართულია თავიდანვე.
 
@@ -54,15 +54,13 @@ select count(*) from public.items;             -- მაღაზიის ნ�
 
 ვინც **პირველი დარეგისტრირდება**, ავტომატურად ადმინი ხდება. მერე ადმინის პანელიდან სხვებსაც შეუძლია მისცეს ადმინის უფლება.
 
-## 4. GitHub Pages
+## 4. ჰოსტინგი: Vercel
 
-საიტი იხსნება მისამართზე **https://bakakuri.github.io/zarapkhana/**. ფაილებს GitHub Pages `gh-pages` ბრანჩიდან კითხულობს, რომელიც `main`-ის ასლია.
+საიტი იხსნება მისამართზე **https://zarapkhana.vercel.app/**.
 
-თუ გინდა, რომ Pages პირდაპირ `main`-იდან განახლდეს, გახსენი **Settings → Pages → Build and deployment** და აირჩიე:
+Vercel-ის პროექტი `zarapkhana` ამ რეპოზიტორიასთანაა მიბმული. ყოველი push `main`-ში ავტომატურად ანახლებს საიტს. აწყობა (build) საჭირო არ არის, რადგან ფაილები სტატიკურია.
 
-- **Source:** Deploy from a branch;
-- **Branch:** `main`;
-- **Folder:** `/ (root)`.
+საკუთარი დომენის მისაბმელად გახსენი **Vercel → zarapkhana → Settings → Domains**. ახალი მისამართი Supabase-ის Redirect URLs-შიც დაამატე.
 
 ## ფაილები
 
