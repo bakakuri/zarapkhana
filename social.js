@@ -125,8 +125,13 @@
     const ach = (me && me.ach) || {};
     const got = Z.ACH.filter((a) => ach[a.k]).length;
     $('#achCount').textContent = got + ' / ' + Z.ACH.length;
-    Z.setHTML($('#achGrid'), Z.ACH.map((a, i) => '<button type="button" class="ach-item' + (ach[a.k] ? '' : ' off') + '" data-ach="' + a.k + '" style="--k:' + i + '" title="' + Z.esc(a.desc) + '">' + Z.medal(a, ach[a.k]) + '<small>' + Z.esc(a.name) + '</small></button>').join(''));
+    const order = Z.ACH.filter((a) => ach[a.k]).concat(Z.ACH.filter((a) => !ach[a.k]));
+    Z.setHTML($('#achGrid'), order.map((a, i) => '<button type="button" class="ach-item' + (ach[a.k] ? '' : ' off') + '" data-ach="' + a.k + '" style="--k:' + i + '" title="' + Z.esc(a.desc) + '">' + Z.medal(a, ach[a.k]) + '<small>' + Z.esc(a.name) + '</small></button>').join(''));
   }
+  $('#achMore').addEventListener('click', () => {
+    const open = $('#achGrid').classList.toggle('open');
+    $('#achMore').textContent = open ? 'ნაკლების ჩვენება' : 'ყველას ჩვენება';
+  });
   $('#achGrid').addEventListener('click', (e) => {
     const b = e.target.closest('[data-ach]');
     if (!b) return;

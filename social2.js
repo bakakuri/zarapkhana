@@ -223,6 +223,13 @@
   }
   bellBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleBell(); });
   $('#bellRead').addEventListener('click', markRead);
+  /* ---------- settings menu: theme, sound, language ---------- */
+  const setBtn = $('#setBtn'), setPop = $('#setPop');
+  const toggleSet = (force) => { const open = force != null ? force : setPop.hidden; setPop.hidden = !open; setBtn.setAttribute('aria-expanded', String(open)); };
+  setBtn.addEventListener('click', (e) => { e.stopPropagation(); if (!pop.hidden) toggleBell(false); toggleSet(); });
+  bellBtn.addEventListener('click', () => toggleSet(false));
+  document.addEventListener('click', (e) => { if (!setPop.hidden && !e.target.closest('#setPop, #setBtn')) toggleSet(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !setPop.hidden) { toggleSet(false); setBtn.focus(); } });
   document.addEventListener('click', (e) => {
     if (!pop.hidden && !e.target.closest('#bellPop, #bellBtn')) toggleBell(false);
     const li = e.target.closest('#bellList [data-act]');

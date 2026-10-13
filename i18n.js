@@ -6,7 +6,7 @@
   Z.lang = Z.store.get('zar-lang', 'ka') === 'en' ? 'en' : 'ka';
   Z.setLang = (l) => { Z.store.set('zar-lang', l === 'en' ? 'en' : 'ka'); location.reload(); };
   const btn = document.getElementById('langBtn');
-  if (btn) { btn.setAttribute('translate', 'no'); btn.textContent = Z.lang === 'en' ? 'ქა' : 'EN'; btn.title = Z.lang === 'en' ? 'ქართული' : 'English'; }
+  if (btn) { const v = btn.querySelector('.set-v'); if (v) v.textContent = Z.lang === 'en' ? 'ქართული' : 'English'; else { btn.setAttribute('translate', 'no'); btn.textContent = Z.lang === 'en' ? 'ქა' : 'EN'; } btn.title = Z.lang === 'en' ? 'ქართული' : 'English'; }
   if (Z.lang !== 'en') { Z.t = (s) => s; return; }
 
   document.documentElement.lang = 'en';
@@ -37,6 +37,7 @@
   function trText(n) {
     const v = n.nodeValue;
     if (!v || !hasGeo.test(v) || blocked(n.parentElement)) return;
+    if (n.parentElement.dataset.en) { n.nodeValue = n.parentElement.dataset.en; return; }
     if (n.parentElement.matches('.av, .avatar')) { const c = [...v.trim()].map((x) => TR[x] ?? x).join(''); n.nodeValue = c.charAt(0).toUpperCase() + c.slice(1); return; }
     const t = Z.t(v);
     if (t !== v) n.nodeValue = t;
