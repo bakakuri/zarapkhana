@@ -19,6 +19,8 @@
 2. ჩასვი ფაილი [`supabase/zarapkhana-setup.sql`](supabase/zarapkhana-setup.sql) მთლიანად და დააჭირე **Run**. თუ გამოჩნდება გაფრთხილება „destructive operation“, დაადასტურე „Run this query“.
 3. ფაილის ხელახლა გაშვება უსაფრთხოა: არსებულ მონაცემებს არ შლის, მხოლოდ ანახლებს ფუნქციებს.
 
+> ამ პროექტში (`hpcmgthvyanerhejjhfk`) ბაზის დიდი ნაწილი უკვე დაყენებულია. დარჩენილია მხოლოდ [`supabase/zarapkhana-finish.sql`](supabase/zarapkhana-finish.sql), რომელიც ზემოთ აღწერილი წესით უნდა გაუშვა.
+
 შემოწმება:
 
 ```sql
@@ -54,13 +56,13 @@ select count(*) from public.items;             -- მაღაზიის ნ�
 
 ## 4. GitHub Pages
 
-**Settings → Pages → Build and deployment:**
+საიტი იხსნება მისამართზე **https://bakakuri.github.io/zarapkhana/**. ფაილებს GitHub Pages `gh-pages` ბრანჩიდან კითხულობს, რომელიც `main`-ის ასლია.
+
+თუ გინდა, რომ Pages პირდაპირ `main`-იდან განახლდეს, გახსენი **Settings → Pages → Build and deployment** და აირჩიე:
 
 - **Source:** Deploy from a branch;
 - **Branch:** `main`;
 - **Folder:** `/ (root)`.
-
-რამდენიმე წუთში საიტი გაიხსნება მისამართზე `https://<მომხმარებელი>.github.io/<რეპო>/`.
 
 ## ფაილები
 
@@ -74,7 +76,8 @@ select count(*) from public.items;             -- მაღაზიის ნ�
 | `admin.js` | ადმინის პანელი |
 | `i18n*.js` | ინგლისური თარგმანი |
 | `supabase/migrations/*.sql` | ბაზის სქემა ნაწილებად |
-| `supabase/zarapkhana-setup.sql` | ყველა მიგრაცია ერთ ფაილში |
+| `supabase/zarapkhana-setup.sql` | ყველა მიგრაცია ერთ ფაილში (ახალი პროექტისთვის) |
+| `supabase/zarapkhana-finish.sql` | ამ პროექტის დასასრულებელი ნაწილი |
 
 `config.js`-ში მხოლოდ **საჯარო** anon გასაღებია. ის ბრაუზერისთვისაა განკუთვნილი და უსაფრთხოა, რადგან ყველა ჩაწერა RLS-ით და სერვერის ფუნქციებით მოწმდება. `service_role` გასაღები არასდროს ჩაწერო საიტის ფაილებში.
 
